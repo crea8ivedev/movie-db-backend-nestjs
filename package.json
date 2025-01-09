@@ -12,7 +12,7 @@
     "dev": "nest start --watch",
     "seed": "ts-node -r tsconfig-paths/register src/db.seeder.ts",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "pm2 start ./dist/main --name backend-nestjs",
+    "start:prod": "pm2 start ./dist/main.js --name backend-nestjs",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
