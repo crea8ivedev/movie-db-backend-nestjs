@@ -22,7 +22,11 @@ async function bootstrap() {
   app.use(session(sessionConfig));
   app.use(passport.initialize());
   app.use(passport.session());
-
+  console.log("frontendUrl", frontendUrl)
+  app.enableCors({
+    origin: frontendUrl,
+    credentials: true,
+  });
   app.use(
     '/api-docs',
     basicAuth({
@@ -62,11 +66,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
-
-  app.enableCors({
-    origin: frontendUrl,
-    credentials: true,
-  });
 
   await app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
