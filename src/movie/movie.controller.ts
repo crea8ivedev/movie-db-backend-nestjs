@@ -9,13 +9,15 @@ import {
   UseInterceptors,
   Req,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from '../utils/multer';
-import { ApiBody, ApiConsumes, ApiCookieAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiCookieAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PaginateDto } from './dto/movies-pagination.dto';
 
 @ApiTags('Movies')
 @ApiCookieAuth()
@@ -41,8 +43,10 @@ export class MovieController {
       ],
     },
   })
-  async index(@Req() req) {
-    return this.movieService.findAll(req.user._id);
+  @ApiQuery({ name: 'page', required: false, description: 'Page number', type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, description: 'Number of items per page', type: Number, example: 10 })
+  async index(@Req() req, @Query() paginateDto: PaginateDto) {
+    return this.movieService.findAll(req.user._id, paginateDto);
   }
 
   @Get(':id')
