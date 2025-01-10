@@ -1,4 +1,4 @@
-import { Controller, Post, Get, UseGuards, Req, Res } from '@nestjs/common';
+import { Controller, Post, UseGuards, Req, Res, Delete } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -61,7 +61,7 @@ export class AuthController {
     });
   }
 
-  @Get('logout')
+  @Delete('logout')
   @ApiResponse({
     status: 200,
     description: 'Logout successful',
@@ -73,7 +73,9 @@ export class AuthController {
   })
   @ApiResponse({ status: 200, description: 'Logout successful' })
   logout(@Req() req) {
-    req.logout();
+    req.logout(() => {
+      req.session.destroy(function () {});
+    });
     return { message: 'Logout successful' };
   }
 }

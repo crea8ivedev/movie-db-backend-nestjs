@@ -22,7 +22,7 @@ export class MovieService {
       .limit(limit)
       .exec();
 
-    const totalMovies = await this.movieModel.countDocuments().exec();
+    const totalMovies = await this.movieModel.countDocuments({ userId }).exec();
     const totalPages = Math.ceil(totalMovies / limit);
 
     return {
