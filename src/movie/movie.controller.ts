@@ -30,17 +30,25 @@ export class MovieController {
     status: 200,
     description: 'Movies fetch successfully',
     schema: {
-      example: [
-        {
-          _id: '641d0a1f1c2b2b06f2a1423b',
-          title: 'Inception',
-          year: 2010,
-          poster: 'https://example.com/uploads/123456789.jpg',
-          userId: '641d0a1f1c2b2b06f2a1423a',
-          createdAt: '2025-01-09T10:00:00.000Z',
-          updatedAt: '2025-01-09T10:00:00.000Z',
+      example: {
+        data: [
+          {
+            _id: '641d0a1f1c2b2b06f2a1423b',
+            title: 'Inception',
+            year: 2010,
+            poster: 'https://example.com/uploads/123456789.jpg',
+            userId: '641d0a1f1c2b2b06f2a1423a',
+            createdAt: '2025-01-09T10:00:00.000Z',
+            updatedAt: '2025-01-09T10:00:00.000Z',
+          },
+        ],
+        meta: {
+          total: 1,
+          page: 1,
+          limit: 10,
+          totalPages: 1,
         },
-      ],
+      },
     },
   })
   @ApiQuery({ name: 'page', required: false, description: 'Page number', type: Number, example: 1 })

@@ -63,7 +63,6 @@ export class MovieService {
     userId: string,
     posterUrl?: string,
   ) {
-    console.log({ _id: id, userId });
     const movie = await this.movieModel.findOne({ _id: id, userId });
     if (!movie) {
       throw new NotFoundException('Movie not found');

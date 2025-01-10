@@ -22,7 +22,6 @@ async function bootstrap() {
   app.use(session(sessionConfig));
   app.use(passport.initialize());
   app.use(passport.session());
-  console.log("frontendUrl", frontendUrl)
   app.enableCors({
     origin: frontendUrl,
     credentials: true,
